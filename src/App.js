@@ -9,6 +9,7 @@ import { ProtectedRoute } from "./components/ProtectedRoute"
 import { LoggedUser } from "./components/LoggedUser"
 import { AuthContextComponent } from "./contexts/authContext"
 
+
 function App() {
   return (
     <div className="">
