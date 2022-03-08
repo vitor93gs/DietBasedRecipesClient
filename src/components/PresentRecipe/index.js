@@ -1,11 +1,10 @@
 import Swal from 'sweetalert2'
 
 export function PresentRecipe(name, ingredients, instructions){
-    const xpd = "/./g"
     return (
         Swal.fire({
             title: `<strong>${name}</strong>`,
-            html:"<strong>INGREDIENTS :</strong>" + ingredients.join(", ") + "<br/> <strong>INSTRUCTIONS :</strong>" + instructions.replace(/[.]{1}/g,".<br/>"),
+            html:"<strong>INGREDIENTS : <br/></strong>" + ingredients.join(", ") + "<br/> <strong>INSTRUCTIONS : <br/></strong>" + instructions.replace(/[.]{1}/g,".<br/>"),
             showCloseButton: true,
             showCancelButton: false,
             focusConfirm: false,

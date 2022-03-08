@@ -1,21 +1,25 @@
 import { FormField } from "../../components/FormField"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+// import { PresentRecipe } from "../PresentRecipe"
+import { api } from "../../api"
+
 const { Configuration, OpenAIApi } = require("openai")
+
+
 
 export function GenerateNewRecipe(){
     const [form, setForm] = useState({firstIngredient: "", secondIngredient: "", thirdIngredient: "", fourthIngredient: "", fifthIngredient: ""})
     const [prompt, setPrompt] = useState("")
     const [response, setResponse] = useState("")
     
-    console.log(process.env.REACT_APP_OPENAIKEI)
-    const configuration = new Configuration({ apiKey : process.env.REACT_APP_OPENAIKEI})
-
+    
+    const configuration = new Configuration({ apiKey :"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"})
+    
     const openai = new OpenAIApi(configuration);
 
     function handleChange(event){
         setForm({...form, [event.target.name] : event.target.value})
-        setPrompt(`Generate a JSON containing a diet recipe with a name, instructions, ingredients, using the following ingredients:: ${form.firstIngredient} ${form.secondIngredient} ${form.thirdIngredient} ${form.fourthIngredient} ${form.fifthIngredient}`)
-        
+        setPrompt(`Generate a JSON containing a diet recipe with a name, ingredients and instructions, using the following ingredients: ${form.firstIngredient} ${form.secondIngredient} ${form.thirdIngredient} ${form.fourthIngredient} ${form.fifthIngredient}`)
     }
 
     function handleSubmit(e){
@@ -27,11 +31,12 @@ export function GenerateNewRecipe(){
         top_p: 1,
         frequency_penalty: 0,
         presence_penalty: 0,
-        }).then((response) => {
-            setResponse(response.data.choices[0].text)
+        }).then((res) => {
+            setResponse(res.data.choices[0].text)
         })
         
     }
+    
     return <>
         <h1>
         CREATE YOUR OWN DIET RECIPE
@@ -46,6 +51,6 @@ export function GenerateNewRecipe(){
             <br/>
             <button type="submit" > Generate! </button>
         </form>
-        <p>{response}</p>
+        
     </>
 }

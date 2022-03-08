@@ -54,7 +54,7 @@ export function Login(){
     return(
         <div>
             <h1>
-                LOGIN AREA
+                LOGIN
             </h1>
             <form onSubmit={handleSubmit}>
                 <FormField type="email" label="E-mail" name="email" id="signupFormEmail" readOnly={loading} required={true} value={form.email} onChange={handleChange}/>

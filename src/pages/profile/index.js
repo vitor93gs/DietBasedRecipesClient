@@ -34,18 +34,17 @@ export  function Profile(){
     function handleShow(cur){
         return(PresentRecipe(cur.name, cur.ingredients, cur.instructions))
     }
-    
     if (loggedInUser.token) {
         return(
             <>
                 <h1>
-                    Welcome back {loggedInUser.user.name}! Here are you favorite recipes:
+                    Welcome back {loggedInUser.user.name}! 
                 </h1>
+                {response.data.favoriteRecipes[0]? <h2>Here are you favorite recipes:</h2> : <h2>You dont have any favorite recipe!</h2>}
                 {response.data.favoriteRecipes.map((cur) => {
                     return (
                         <div>
                             <h3>{cur.name}</h3>
-                            
                             <button onClick={() => {handleShow(cur)}}> Show more</button>
                             <button onClick={()=>{handleClick(cur._id)}}>Remove from favorites!</button>
                         </div>
