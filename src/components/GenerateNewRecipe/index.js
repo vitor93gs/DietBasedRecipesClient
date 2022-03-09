@@ -79,11 +79,11 @@ export function GenerateNewRecipe(){
         </h1>
         <h2>Insert the ingredients you want to build your recipe with:</h2>
         <form onSubmit={handleSubmit}>
-            <FormField type="text" label="1" name="firstIngredient" id="FirstIngredient" readOnly={false} required={false} value={form.firstIngredient} onChange={handleChange} pattern="^[A-Za-z ]{1,30}$"/>
-            <FormField type="text" label="2" name="secondIngredient" id="SecondIngredient" readOnly={false} required={false} value={form.secondIngredient} onChange={handleChange} pattern="^[A-Za-z ]{1,30}$"/>
-            <FormField type="text" label="3" name="thirdIngredient" id="ThirdIngredient" readOnly={false} required={false} value={form.thirdIngredient} onChange={handleChange} pattern="^[A-Za-z ]{1,30}$"/>
-            <FormField type="text" label="4" name="fourthIngredient" id="FourthIngredient" readOnly={false} required={false} value={form.fourthIngredient} onChange={handleChange} pattern="^[A-Za-z ]{1,30}$"/>
-            <FormField type="text" label="5" name="fifthIngredient" id="FifthIngredient" readOnly={false} required={false} value={form.fifthIngredient} onChange={handleChange} pattern="^[A-Za-z ]{1,30}$"/>
+            <FormField list="food" type="text" label="1" name="firstIngredient" id="FirstIngredient" readOnly={false} required={false} value={form.firstIngredient} onChange={handleChange} pattern="^[A-Za-z ]{1,30}$"/>
+            <FormField list="food" type="text" label="2" name="secondIngredient" id="SecondIngredient" readOnly={false} required={false} value={form.secondIngredient} onChange={handleChange} pattern="^[A-Za-z ]{1,30}$"/>
+            <FormField list="food" type="text" label="3" name="thirdIngredient" id="ThirdIngredient" readOnly={false} required={false} value={form.thirdIngredient} onChange={handleChange} pattern="^[A-Za-z ]{1,30}$"/>
+            <FormField list="food" type="text" label="4" name="fourthIngredient" id="FourthIngredient" readOnly={false} required={false} value={form.fourthIngredient} onChange={handleChange} pattern="^[A-Za-z ]{1,30}$"/>
+            <FormField list="food" type="text" label="5" name="fifthIngredient" id="FifthIngredient" readOnly={false} required={false} value={form.fifthIngredient} onChange={handleChange} pattern="^[A-Za-z ]{1,30}$"/>
             <br/>
             <button type="submit" > Generate! </button>
         </form> 
