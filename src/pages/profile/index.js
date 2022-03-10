@@ -44,7 +44,7 @@ export  function Profile(){
                     </h1>
                     <div className="row">
                         <div className="col-md-7">
-                            <p>{response.data.favoriteRecipes[0]? <h2>Here are you favorite recipes:</h2> : <h2>You dont have any favorite recipe!</h2>}</p>
+                            {response.data.favoriteRecipes[0]? <h2>Here are you favorite recipes:</h2> : <h2>You dont have any favorite recipe!</h2>}
                         </div>
                     </div>
                 </div>

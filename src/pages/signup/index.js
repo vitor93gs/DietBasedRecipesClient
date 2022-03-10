@@ -1,4 +1,4 @@
-import { FormField } from "../../components/FormField"
+import { FormField } from "../FormField"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { api } from "../../api/index"
