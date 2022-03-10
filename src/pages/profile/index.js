@@ -37,7 +37,7 @@ export  function Profile(){
     }
     if (loggedInUser.token) {
         return(
-            <section className="hero">
+            <section className="hero_1">
                 <div className="container">
                     <h1>
                     Welcome back {loggedInUser.user.name}!

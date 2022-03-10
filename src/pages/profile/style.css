@@ -1,7 +1,7 @@
-.hero{
+.hero_1{
     background-image: linear-gradient(rgb(102, 78, 54,0.6),rgba(153,102,51,0.2)) , url(../../img/wallpaper.jpg);
     background-size: cover;
-    height: 1vh;
+    height: 120vh;
 }
 .recipe{
     font-family: "Arvo", serif;

@@ -2,7 +2,7 @@ import axios from "axios"
 
 const apisURL = {
   development: "http://localhost:3700/v1",
-  production: "https://vita-auctor-server.herokuapp.com/api/v0",
+  production: "https://diet-based-recipe.herokuapp.com/v1",
 };
 
 const api = axios.create({
