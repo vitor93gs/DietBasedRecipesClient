@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { PresentRecipe } from "../PresentRecipe"
 import { api } from "../../api"
 import { AuthContext } from "../../contexts/authContext"
-
+import "./style.css"
 const { Configuration, OpenAIApi } = require("openai")
 
 
@@ -15,7 +15,8 @@ export function GenerateNewRecipe(){
     const [response, setResponse] = useState("")
     const [recipeObject , setRecipeObject] = useState({})
     const { loggedInUser } = useContext(AuthContext);
-
+    const [loading, setLoading] = useState(false)
+    const [disabled, setDisabled] = useState({isDisabled:false,btn:"Add to favorites"})
 
     const configuration = new Configuration({ apiKey :process.env.REACT_APP_OPENAIKEI})
     
@@ -50,6 +51,8 @@ export function GenerateNewRecipe(){
 
     function handleSubmit(e){
         e.preventDefault()
+        setLoading(true)
+
         openai.createCompletion("text-davinci-001", {  
         prompt: prompt,
         temperature: 0,
@@ -58,15 +61,20 @@ export function GenerateNewRecipe(){
         frequency_penalty: 0,
         presence_penalty: 0,
         }).then((res) => {
+            setLoading(false)
+            setDisabled({isDisabled:false,btn:"Add to favorites"})
             setResponse(res.data.choices[0].text)
         })
     }
+
     function handleClick(){
         PresentRecipe(recipeObject.name, recipeObject.ingredients, recipeObject.instructions)
     }
+
     async function handleFavorite(){
         try {
             const postedRecipe = await api.patch(`/recipes/makeFavorite/${recipeObject._id}`)
+            setDisabled({isDisabled:true,btn:"Added to favorites!"})
             console.log(postedRecipe)
         } catch (error) {
             console.log(error)
@@ -74,20 +82,39 @@ export function GenerateNewRecipe(){
     }
 
     return <>
-        <h1>
-        CREATE YOUR OWN DIET RECIPE
-        </h1>
-        <h2>Insert the ingredients you want to build your recipe with:</h2>
-        <form onSubmit={handleSubmit}>
-            <FormField list="food" type="text" label="1" name="firstIngredient" id="FirstIngredient" readOnly={false} required={false} value={form.firstIngredient} onChange={handleChange} pattern="^[A-Za-z ]{1,30}$"/>
-            <FormField list="food" type="text" label="2" name="secondIngredient" id="SecondIngredient" readOnly={false} required={false} value={form.secondIngredient} onChange={handleChange} pattern="^[A-Za-z ]{1,30}$"/>
-            <FormField list="food" type="text" label="3" name="thirdIngredient" id="ThirdIngredient" readOnly={false} required={false} value={form.thirdIngredient} onChange={handleChange} pattern="^[A-Za-z ]{1,30}$"/>
-            <FormField list="food" type="text" label="4" name="fourthIngredient" id="FourthIngredient" readOnly={false} required={false} value={form.fourthIngredient} onChange={handleChange} pattern="^[A-Za-z ]{1,30}$"/>
-            <FormField list="food" type="text" label="5" name="fifthIngredient" id="FifthIngredient" readOnly={false} required={false} value={form.fifthIngredient} onChange={handleChange} pattern="^[A-Za-z ]{1,30}$"/>
-            <br/>
-            <button type="submit" > Generate! </button>
-        </form> 
-        {recipeObject._id ? <h1>{recipeObject.name} <button onClick={handleClick}>Show Recipe</button>{loggedInUser.token ? <button onClick={handleFavorite}> Adicionar aos favoritos</button>:"" }</h1> : ""}      
-        
+        <section className="hero">
+            <div className="container">
+                <h1>
+                Generate your own diet recipe
+                </h1>
+                <div className="row">
+                    <div className="col-md-7">
+                        <p>Insert up to 5 ingredients you want to build your recipe with:</p>
+                    </div>
+                </div>
+            </div>
+            <section className="container-fluid forms">
+            <section className="row justify-content-center">
+            <section className="col-12 col-sm6 col-md-3">
+                <form className="form-container" onSubmit={handleSubmit}>
+                        <div>
+                            <FormField list="food" type="text" label="1" name="firstIngredient" id="FirstIngredient" readOnly={loading} required={false} value={form.firstIngredient} onChange={handleChange} pattern="^[A-Za-z ]{1,30}$"/>
+                            <FormField list="food" type="text" label="2" name="secondIngredient" id="SecondIngredient" readOnly={loading} required={false} value={form.secondIngredient} onChange={handleChange} pattern="^[A-Za-z ]{1,30}$"/>
+                            <FormField list="food" type="text" label="3" name="thirdIngredient" id="ThirdIngredient" readOnly={loading} required={false} value={form.thirdIngredient} onChange={handleChange} pattern="^[A-Za-z ]{1,30}$"/>
+                            <FormField list="food" type="text" label="4" name="fourthIngredient" id="FourthIngredient" readOnly={loading} required={false} value={form.fourthIngredient} onChange={handleChange} pattern="^[A-Za-z ]{1,30}$"/>
+                            <FormField list="food" type="text" label="5" name="fifthIngredient" id="FifthIngredient" readOnly={loading} required={false} value={form.fifthIngredient} onChange={handleChange} pattern="^[A-Za-z ]{1,30}$"/>
+                            <br/>
+                            <button type="submit" disabled={loading} className="btn btn-success" > Generate! </button> 
+                        </div>
+                </form>
+            </section>
+            </section>
+            <section className="row justify-content-center recipe">
+                <section className="col-12 col-sm6 col-md-3">
+                {recipeObject._id ? <div className="form-container"><h2>{recipeObject.name} <br/><button className="btn btn-success" onClick={handleClick}>Show Recipe</button>{loggedInUser.token ? <button className="btn btn-danger" disabled={disabled.isDisabled} onClick={handleFavorite}> {disabled.btn}</button>:"" }</h2> </div> : ""}
+                </section>
+                </section>
+            </section>
+        </section>             
     </>
 }

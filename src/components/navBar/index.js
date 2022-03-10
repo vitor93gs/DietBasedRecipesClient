@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../contexts/authContext";
+import "./style.css"
 
 
 export function NavBar(){
@@ -9,7 +10,6 @@ export function NavBar(){
     const navigate = useNavigate();
 
     useEffect(() => {
-        console.log(loggedInUser.token)
         if(!(loggedInUser.token==="")){
             setLoginState(true);
         }
@@ -54,17 +54,26 @@ export function NavBar(){
                   </Link>
                 </li>
                 <li className="nav-item">
+                  <Link
+                    className="nav-link"
+                    aria-current="page"
+                    to={loginState ? "/editprofile" : ""}
+                  >
+                    {loginState ? "Edit" : ""}
+                  </Link>
+                </li>
+                <li className="nav-item">
                   {loginState ? (
                     <button
                       type="button"
                       className="btn btn-light btn-outline-info"
                       onClick={handleLogOut}
                     >
-                      Sair
+                      Logout
                     </button>
                   ) : (
                     <Link className="nav-link" to="/signup">
-                      Cadastro
+                      Signup
                     </Link>
                   )}
                 </li>

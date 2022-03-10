@@ -1,0 +1,21 @@
+.hero{
+    background-image: linear-gradient(rgb(102, 78, 54,0.6),rgba(153,102,51,0.2)) , url(../../img/wallpaper.jpg);
+    background-size: cover;
+    height: 1vh;
+}
+.recipe{
+    font-family: "Arvo", serif;
+    font-size: 1rem;
+    line-height: 1.3;
+    text-shadow: 1px 1px 1px #000;
+    color: rgb(145, 145, 145);
+    padding: 20px;
+    margin: 20px;
+}
+h2{
+    font-family: "Arvo", serif;
+    font-size: 1.5rem;
+    line-height: 1.3;
+    text-shadow: 1px 1px 1px #000;
+    color: rgb(255, 255, 255);
+}

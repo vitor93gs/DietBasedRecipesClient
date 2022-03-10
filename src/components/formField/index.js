@@ -2,11 +2,10 @@ const foodList = ["Abalone","Açaí berries","Açaí juice","Acorn squash","Adzu
 
 export function FormField(props){
     return(
-        <div>
-            <label htmlFor={props.id}>{props.label} :</label>
-            <br/>
-            <input
-                className=""
+        <div className="form-group">
+            <label key="1" htmlFor={props.id} className="form-label">{props.label} :</label>
+            <input key="3"
+                className="form-control"
                 type={props.type}
                 id={props.id}
                 name={props.name}
@@ -17,9 +16,10 @@ export function FormField(props){
                 readOnly={props.readOnly}
                 list={props.list}
             />
-            <datalist id={props.list}>
-                {foodList.map((x) => {
-                    return <option value={x}/>
+            <br/>
+            <datalist key="4" id={props.list}>
+                {foodList.map((x, index) => {
+                    return <option key={index} value={x}/>
                 })}
             </datalist>
         </div>

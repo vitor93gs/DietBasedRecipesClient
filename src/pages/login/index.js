@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { api } from "../../api/index"
 import { AuthContext } from "../../contexts/authContext"
 import Swal from 'sweetalert2'
+import "./style.css"
 
 export function Login(){
 
@@ -32,7 +33,7 @@ export function Login(){
             setLoggedInUser(response.data)
 
             localStorage.setItem("loggedInUser", JSON.stringify(response.data))
-
+            
             setLoading(false)
 
             navigate("/profile")
@@ -52,15 +53,21 @@ export function Login(){
     }
 
     return(
-        <div>
+        <div className="hero">
+        <section className="container-fluid forms">
+        <section className="row justify-content-center">
+        <section className="col-12 col-sm6 col-md-3">
             <h1>
                 LOGIN
             </h1>
-            <form onSubmit={handleSubmit}>
+            <form className="form-container" onSubmit={handleSubmit}>
                 <FormField type="email" label="E-mail" name="email" id="signupFormEmail" readOnly={loading} required={true} value={form.email} onChange={handleChange}/>
                 <FormField type="password" label="Password" name="password" id="signupFormPassword" readOnly={loading} required={true} value={form.password} onChange={handleChange} pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$"/>
-                <button type="submit">Login</button>
-            </form>
+                <button type="submit" className="btn btn-success">Login</button>
+            </form>   
+        </section>
+        </section>
+        </section>
         </div>
     )
 }

@@ -3,6 +3,7 @@ import { Navigate, useNavigate } from "react-router-dom"
 import { AuthContext } from "../../contexts/authContext"
 import { api } from "../../api"
 import { PresentRecipe } from "../../components/PresentRecipe"
+import "./style.css"
 
 
 
@@ -13,6 +14,7 @@ export  function Profile(){
 
     const { loggedInUser } = useContext(AuthContext)
     const [ response , setResponse ] = useState({data:{favoriteRecipes:[]}})
+
     async function getInfo(){
         setResponse(await api.get("/users/profile"))
     }
@@ -20,7 +22,6 @@ export  function Profile(){
     useEffect(() => {
         getInfo()
     },[])
-    console.log(response.data.favoriteRecipes)
 
     async function handleClick(id){
         try {
@@ -36,23 +37,33 @@ export  function Profile(){
     }
     if (loggedInUser.token) {
         return(
-            <>
-                <h1>
-                    Welcome back {loggedInUser.user.name}! 
-                </h1>
-                {response.data.favoriteRecipes[0]? <h2>Here are you favorite recipes:</h2> : <h2>You dont have any favorite recipe!</h2>}
-                {response.data.favoriteRecipes.map((cur) => {
-                    return (
-                        <div>
-                            <h3>{cur.name}</h3>
-                            <button onClick={() => {handleShow(cur)}}> Show more</button>
-                            <button onClick={()=>{handleClick(cur._id)}}>Remove from favorites!</button>
+            <section className="hero">
+                <div className="container">
+                    <h1>
+                    Welcome back {loggedInUser.user.name}!
+                    </h1>
+                    <div className="row">
+                        <div className="col-md-7">
+                            <p>{response.data.favoriteRecipes[0]? <h2>Here are you favorite recipes:</h2> : <h2>You dont have any favorite recipe!</h2>}</p>
                         </div>
-                        
+                    </div>
+                </div>
+                <section className="row justify-content-center">
+                <section className="col-12 col-sm6 col-md-3">
+                {response.data.favoriteRecipes.map((cur,index) => {
+                    return (
+                        <div className="recipe form-container" key={index}>
+                            <h3>{cur.name}</h3>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                            <button className="btn btn-success" onClick={() => {handleShow(cur)}}> Show more</button>
+                            <button className="btn btn-danger" onClick={()=>{handleClick(cur._id)}}>Remove from favorites!</button>
+                            </div>
+                        </div>
                     )
                 })}
-                
-            </>
+                </section>
+                </section>
+            </section>
         )
     } else {
     return <Navigate to="/login" />
