@@ -89,7 +89,7 @@ export function GenerateNewRecipe(){
                 </h1>
                 <div className="row">
                     <div className="col-md-7">
-                        <p>Insert up to 5 ingredients you want to build your recipe with:</p>
+                        <p>Insert up to 5 ingredients you have at home and let an AI generate a diet recipe for you!</p>
                     </div>
                 </div>
             </div>
