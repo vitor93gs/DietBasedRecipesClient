@@ -1,4 +1,4 @@
-import { FormField } from "../../pages/FormField"
+import { FormField } from "../FormField"
 import { useContext } from "react"
 import { useEffect, useState } from "react"
 import { PresentRecipe } from "../PresentRecipe"
