@@ -53,7 +53,7 @@ export function Login(){
     }
 
     return(
-        <div className="hero">
+        <div className="hero_1">
         <section className="container-fluid forms">
         <section className="row justify-content-center">
         <section className="col-12 col-sm6 col-md-3">

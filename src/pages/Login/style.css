@@ -1,6 +1,6 @@
-.hero{
+.hero_1{
     background-image: linear-gradient(rgb(102, 78, 54,0.6),rgba(153,102,51,0.2)) , url(../../img/wallpaper.jpg);
-    height: 100%;
+    height: 120vh;
     background-size: cover;
     padding-top: 8vh;
 }
